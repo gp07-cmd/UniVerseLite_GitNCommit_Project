@@ -70,3 +70,5 @@ public class Student {
     }
 
 }//end of Student Class
+
+//same reasoning for the final keyword as 'Assignment class's
