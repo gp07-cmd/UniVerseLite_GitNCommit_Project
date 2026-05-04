@@ -103,26 +103,28 @@ class AcademicUnit extends CampusEntity{
         int index = students.indexOf(student);
         if(index == -1)
         //Add student to arrayList
-       {students.add(student);}
+       {    students.add(student);
+            //Increase student Count
+            studentCount++;
+       }
        else
        {
         System.out.println("Student Already Enrolled!");
        }
-       //Increase student Count
-       studentCount++;
     }
     public void removeStudent(Student student)
     {
         //Check the index to find student (if exists)
         int index = students.indexOf(student);
         if(index != -1)
-        {students.remove(student);}
+        {   students.remove(student);
+            //Decrease student Count
+            studentCount--;
+        }
         else
         {
             System.out.println("Student Not Found!");
         }
-        //Decrease student Count
-       studentCount--;
     }
     public void addEquipment(Equipment equip)
     {
@@ -183,13 +185,6 @@ class Facility extends CampusEntity{
         this.usage_frequency = usage_frequency;
     }
     //Getters Setters
-    
-    //Methods
-    @Override
-    public double calculateOperationalCost()
-    {
-        return maintenance_cost * usage_frequency;
-    }
     public double getMaintenance_cost() {
         return maintenance_cost;
     }
@@ -201,6 +196,12 @@ class Facility extends CampusEntity{
     }
     public void setUsage_frequency(double usage_frequency) {
         this.usage_frequency = usage_frequency;
+    }
+    //Methods
+    @Override
+    public double calculateOperationalCost()
+    {
+        return maintenance_cost * usage_frequency;
     }
 }
 class Library extends Facility{
@@ -278,6 +279,9 @@ class SecurityService extends ServiceUnit{
 class HealthCenter extends ServiceUnit{
 
 }
+
+//Aleena: If you think there's no error, let me know and I'll merge my code to main.
+
 
 //the reason the setters are declared final is: When I call the setters within the argument constructor for initialization, a problem "Overridable Method Call in Constructor" arises. This is bcz the child might override these methods and that will cause problems.
 //However, in our system design the child will use the super keyword to call for the initialization of these parent attributes and has no need to override these setter methods as they serve only modificationa nd validation purpose. So they can easily be modified using the parent's setters without any need of them overriding these setters in the child classes.
