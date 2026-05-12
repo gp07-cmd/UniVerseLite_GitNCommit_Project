@@ -369,7 +369,6 @@ class Lab extends AcademicUnit {
         return isfree;
     }
     
-    
     @Override
     public void addStudent(Student s) {
         if(students.size() < totalcapacity){
@@ -848,8 +847,8 @@ class TransportService extends ServiceUnit implements Schedulable{
     
     public TransportService(String name, String location, int entityID, String routeName, int totalBuses) {
         super(name, location, entityID);
-        this.routeName = routeName;
-        this.totalBuses = totalBuses;
+        setRouteName(routeName);
+        setTotalBuses(totalBuses);
     }
 
     @Override
@@ -861,16 +860,24 @@ class TransportService extends ServiceUnit implements Schedulable{
         return routeName;
     }
 
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
+    public final void setRouteName(String routeName) {
+        if(!routeName.isBlank()){
+            this.routeName = routeName;
+        }else{
+            this.routeName = "Unknown";
+        }
     }
 
     public int getTotalBuses() {
         return totalBuses;
     }
 
-    public void setTotalBuses(int totalBuses) {
-        this.totalBuses = totalBuses;
+    public final void setTotalBuses(int totalBuses) {
+        if(totalBuses > 0) {
+            this.totalBuses = totalBuses;
+        }else{
+            this.totalBuses = 0;
+        }
     }
     
 }//end of TransportService class
@@ -923,7 +930,7 @@ class HealthCenter extends ServiceUnit implements Notifiable{
     
     public HealthCenter(String name, String location, int entityID, int doctorsAvailable) {
         super(name, location, entityID);
-        this.doctorsAvailable = doctorsAvailable;
+        setDoctorsAvailable(doctorsAvailable);
     }
 
     @Override
@@ -941,8 +948,13 @@ class HealthCenter extends ServiceUnit implements Notifiable{
         return doctorsAvailable;
     }
 
-    public void setDoctorsAvailable(int doctorsAvailable) {
-        this.doctorsAvailable = doctorsAvailable;
+    public final void setDoctorsAvailable(int doctorsAvailable) {
+        if(doctorsAvailable > 0) {
+            this.doctorsAvailable = doctorsAvailable;
+        }else{
+            this.doctorsAvailable = 0;
+        }
+        
     }
 
 }//end of HealthCenter class
