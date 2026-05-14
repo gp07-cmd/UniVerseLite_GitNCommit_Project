@@ -1,4 +1,5 @@
- import java.io.Serializable;
+package Backend;
+import java.io.Serializable;
 import java.util.*;
 //Course Class
 

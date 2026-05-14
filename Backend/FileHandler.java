@@ -1,3 +1,4 @@
+package Backend;
 import java.io.*;
 import java.util.*;
 
@@ -16,8 +17,8 @@ public class FileHandler {
         catch(FileNotFoundException e){ System.err.println("File Not Found."); e.printStackTrace();}
         catch(IOException e){ e.printStackTrace();}
     }
-    //3) Read from File
-    public CampusData readFromFile(String filename)
+    //2) Read from File
+    public CampusData loadOnStartup(String filename)
     {
         try{
             File file = new File(filename);

@@ -1,8 +1,8 @@
 //Staff Class
-
+package Backend;
 import java.io.Serializable;
 
-class Staff implements Serializable {
+public class Staff implements Serializable {
       
     //Data Members
     private String name;
