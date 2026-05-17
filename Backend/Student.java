@@ -155,6 +155,17 @@ public class Student implements Serializable{
         }
     }
 
+    //View Timetable of each course
+    public void viewTimeTable() {
+
+        System.out.println("Time Table of Enrolled Courses ");
+        System.out.println();
+        for(int i=0; i<c.size(); i++) {
+            c.get(i).generateSchedule();
+            System.out.println();
+        }
+    }
+
 }//end of Student Class
 
 

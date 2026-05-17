@@ -56,17 +56,17 @@ public class Library extends Facility implements Reportable{
 
     //calculating available and borrowed books
     public void booksdata() {
-            int available = 0;
-            int borrowed = 0;
-            for(int i=0; i<b1.size(); i++) {
-                  if(b1.get(i).getAvailability()){
-                        available++;
-                  }else{
-                        borrowed++;
-                  }
+        int available = 0;
+        int borrowed = 0;
+        for(int i=0; i<b1.size(); i++) {
+            if(b1.get(i).getAvailability()){
+                available++;
+            }else{
+                borrowed++;
             }
-            System.out.println("Available Books = " +available);
-            System.out.println("Borrowed Book = " +borrowed);
+        }
+        System.out.println("Available Books = " +available);
+        System.out.println("Borrowed Book = " +borrowed);
     }
 
     @Override
