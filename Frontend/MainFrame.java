@@ -376,9 +376,7 @@ public class MainFrame extends JFrame {
         return panel;
         
     }
-    // ══════════════════════════════════════════════════════════════════════
-    // SEGMENT 4 — FACILITIES TAB (inner tabs for Library, Cafeteria, Hostel)
-    // ══════════════════════════════════════════════════════════════════════
+    // FACILITIES TAB (inner tabs for Library, Cafeteria, Hostel)
     private JPanel buildFacilityPanel() {
  
         JPanel panel = new JPanel(new BorderLayout());
@@ -393,9 +391,8 @@ public class MainFrame extends JFrame {
         return panel;
     }
  
-    // ══════════════════════════════════════════════════════════════════════
-    // SEGMENT 5 — LIBRARY SUB-TAB
-    // ══════════════════════════════════════════════════════════════════════
+    // LIBRARY SUB-TAB
+
     private JPanel buildLibraryPanel() {
  
         JPanel panel = new JPanel(new BorderLayout());
@@ -439,7 +436,7 @@ public class MainFrame extends JFrame {
             }
         }
  
-        // ── ADD BOOK ──────────────────────────────────────────────────────
+        // ── ADD BOOK ─────
         addBookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -461,7 +458,7 @@ public class MainFrame extends JFrame {
             }
         });
  
-        // ── DELETE BOOK ───────────────────────────────────────────────────
+        // ── DELETE BOOK ─────
         deleteBookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -477,8 +474,7 @@ public class MainFrame extends JFrame {
             }
         });
  
-        // ── OPERATIONAL COST ──────────────────────────────────────────────
-        // calculateOperationalCost() is already written in Library
+        // ── OPERATIONAL COST ─────
         opCostBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -494,9 +490,7 @@ public class MainFrame extends JFrame {
         return panel;
     }
  
-    // ══════════════════════════════════════════════════════════════════════
-    // SEGMENT 6 — CAFETERIA SUB-TAB (static — single cafeteria, fixed menu)
-    // ══════════════════════════════════════════════════════════════════════
+    // CAFETERIA SUB-TAB 
     private JPanel buildCafeteriaPanel() {
  
         JPanel panel = new JPanel(new BorderLayout());
@@ -512,7 +506,6 @@ public class MainFrame extends JFrame {
         JTable table   = new JTable(model);
         JScrollPane sp = new JScrollPane(table);
  
-        // Fixed menu rows — no backend needed for these
         model.addRow(new Object[]{"1", "Biryani",        "150"});
         model.addRow(new Object[]{"2", "Daal Chawal",    "100"});
         model.addRow(new Object[]{"3", "Chicken Karahi", "200"});
@@ -540,11 +533,9 @@ public class MainFrame extends JFrame {
         return panel;
     }
  
-    // ══════════════════════════════════════════════════════════════════════
-    // SEGMENT 7 — HOSTEL SUB-TAB (static — single hostel, room status table)
-    // ══════════════════════════════════════════════════════════════════════
+    // HOSTEL SUB-TAB 
     private JPanel buildHostelPanel() {
- 
+
         JPanel panel = new JPanel(new BorderLayout());
  
         // Static info label at top
@@ -558,12 +549,12 @@ public class MainFrame extends JFrame {
         JTable table   = new JTable(model);
         JScrollPane sp = new JScrollPane(table);
  
-        // ── BUTTONS ───────────────────────────────────────────────────────
+        // ── BUTTONS ─────────
         JButton opCostBtn = new JButton("Show Operational Cost");
         JPanel btnPanel = new JPanel();
         btnPanel.add(opCostBtn);
  
-        // ── OPERATIONAL COST ──────────────────────────────────────────────
+        // ── OPERATIONAL COST ───────
         //Create dummy hostels
         Hostel hostel1 = new Hostel("AliGarh Hostel", "Chak Faisal", 131, 5000, 50, 25);
         Hostel hostel2 = new Hostel("Shalimar Hostel", "Chak Shahzad", 132, 5000, 50, 20);
