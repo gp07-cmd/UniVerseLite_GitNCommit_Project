@@ -86,17 +86,16 @@ public class Library extends Facility implements Reportable{
     }
     
     @Override
-    public void generateReport() {
-        System.out.printf("%50s", "Usage Stats for Library");
-        System.out.println();
-        System.out.println("Location : " +location);
-        System.out.println("Entity ID : " +entityID);
-        System.out.println("Usage Information");
-        System.out.println("Maintenance cost : " +maintenance_cost);
-        System.out.println("Usage Frequency : " +usage_frequency);
-        System.out.println("Total Books in Library = " +b1.size());
-        booksdata();
-        System.out.println("Operational Cost : " +calculateOperationalCost());
+    public String generateReport() {
+        String result = "Usage Stats for Library\n" +
+        "Location : " +location + "\n" +
+        "Entity ID : " +entityID + "\n" +
+        "Usage Information: \n" + 
+        "Maintenance cost : " +maintenance_cost + "\n" +
+        "Usage Frequency : " +usage_frequency + "\n" +
+        "Total Books in Library = " +b1.size() + "\n" +
+        "Operational Cost : " +calculateOperationalCost();
+        return result;
     }
 
 }//end of library class

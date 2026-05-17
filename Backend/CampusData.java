@@ -12,7 +12,7 @@ public class CampusData implements Serializable{
     public ArrayList<Course> courses = new ArrayList<>();
     ArrayList<Equipment> equipment = new ArrayList<>();
     ArrayList<Staff> staff = new ArrayList<>();
-    ArrayList<Department> departments = new ArrayList<>();
+    public ArrayList<Department> departments = new ArrayList<>();
     ArrayList<Lab> labs = new ArrayList<>();
     ArrayList<Classroom> classrooms = new ArrayList<>();
     public Cafeteria cafeteria;
@@ -22,7 +22,7 @@ public class CampusData implements Serializable{
     TransportService transportService;
     SecurityService securityService;
     HealthCenter healthCenter;
-    ArrayList<Bus> bus = new ArrayList<>();
+    public ArrayList<Bus> bus = new ArrayList<>();
     public ArrayList<User> users = new ArrayList<>();
 
     //Constructors

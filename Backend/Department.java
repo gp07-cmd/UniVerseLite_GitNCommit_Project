@@ -127,12 +127,13 @@ public class Department extends AcademicUnit implements Reportable{
 
 
     @Override
-    public void generateReport() {
-        System.out.println("DEPARTMENT PERFORMANCE REPORT");
-        System.out.println(this.toString());
-        System.out.println("Total Equipments : " +equipment.size());
-        System.out.println("Operational Cost : " +calculateOperationalCost());
-        System.out.println("Performance : " +calculatingperformance());
+    public String generateReport() {
+        String report = 
+                    this.toString() + "\n" +
+                    "Total Equipments : " + equipment.size() + "\n" +
+                    "Operational Cost : " + calculateOperationalCost() + "\n" +
+                    "Performance : " + calculatingperformance();
+                    return report;
     }
 
 }//end of Department class 

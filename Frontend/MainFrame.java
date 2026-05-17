@@ -46,14 +46,13 @@ public class MainFrame extends JFrame {
         //The following creates the tab bar on the top menu of our frame
         JTabbedPane tabs = new JTabbedPane();
         //Individual Tabs
-        JPanel facilitiesPanel = new JPanel();
-        JPanel servicesPanel = new JPanel();
         //Add tabs to tab bar
         tabs.addTab("Students", buildStudentPanel());
         tabs.addTab("Courses", buildCoursePanel());
         //tabs.addTab("Departments", buildDepartmentPanel());
         tabs.addTab("Facilities", buildFacilityPanel());
-        tabs.addTab("Services", servicesPanel);
+        tabs.addTab("Reports", buildReportPanel());
+       tabs.addTab("Schedules", buildSchedulePanel());
         //Set Visible
         setVisible(true);
         //Add the tabs to our mainframe, and we follow BorderLayout
@@ -422,6 +421,7 @@ public class MainFrame extends JFrame {
         JScrollPane sp = new JScrollPane(table);
  
         // ── LOAD BOOKS FROM FILE ──────────────────────────────────────────
+        boolean doesExist = false;
         // data.library.getBooks() returns the b1 ArrayList inside Library
         if (data.library != null && data.library.getBooks() != null
                 && !data.library.getBooks().isEmpty()) {
@@ -433,8 +433,13 @@ public class MainFrame extends JFrame {
                     b.getEdition(),
                     b.getAvailability() // true = available, false = borrowed
                 });
+                doesExist = true;
             }
         }
+        //If there is no library, we create a new one
+        if(!doesExist)
+        {Library library = new Library("Main Library", "E-Block", 121, 500, 20);
+        data.library = library;}
  
         // ── ADD BOOK ─────
         addBookBtn.addActionListener(new ActionListener() {
@@ -583,6 +588,161 @@ public class MainFrame extends JFrame {
         panel.add(btnPanel, BorderLayout.SOUTH);
         return panel;
     }
+    //Building the Report Panel
+    private JPanel buildReportPanel()
+    {
+        JPanel panel = new JPanel(new BorderLayout()); //main panel
+        JLabel infoLabel = new JLabel("REPORTS");
+        //1) Library Report
+        JButton libraryBtn = new JButton("Library Report");
+        JButton departmentBtn = new JButton("Department Report");
+        panel.add(libraryBtn, BorderLayout.WEST);
+        panel.add(departmentBtn, BorderLayout.EAST);
+        libraryBtn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String result = data.library.generateReport();
+                JOptionPane.showMessageDialog(panel, result, "Library Report", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        //Dummy department data
+                Department dept1 = new Department("CS Department", "D-Block", 719);
+                Department dept2 = new Department("Humanities Department", "A-Block", 289);
+                Department dept3 = new Department("Chemistry Department", "B-Block", 893);
+                data.departments.add(dept1); data.departments.add(dept2); data.departments.add(dept3);
+        departmentBtn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+
+                String result = "DEPARTMENT PERFORMANCE DATA\n";
+                for(int i = 0; i < data.departments.size(); i++)
+                {
+                    result += data.departments.get(i).generateReport() + "\n";
+                }
+                JOptionPane.showMessageDialog(panel, result, "Department Report", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        return panel;
+        
+    }
+    //Build Schedules Panel (Student Courses and Bus Times)
+    private JPanel buildSchedulePanel() {
+
+    JPanel panel = new JPanel(new BorderLayout());
+
+    // Create two classrooms
+    Classroom room1 = new Classroom("Room 101", "Block A", 1, true, 40);
+    Classroom room2 = new Classroom("Room 202", "Block B", 2, true, 35);
+    ArrayList<Classroom> classroomList = new ArrayList<>();
+    classroomList.add(room1);
+    classroomList.add(room2);
+
+    // Create two courses and assign classrooms to them
+    // Course(name, id, creditHours, classroomList)
+    Course c1 = new Course("Object Oriented Programming", "CS201", 3, classroomList);
+    Course c2 = new Course("Discrete Structures",         "CS202", 3, classroomList);
+
+    // It sets the classroom and timeslot inside the Course object
+    c1.scheduleClass();
+    c2.scheduleClass();
+
+    // Create transport service and add buses to it
+    TransportService transport = new TransportService("Campus Transport", "Gate 1", 601, "Main Route", 3);
+
+    // Bus(busNumber, numberPlate, arrivalTime, departureTime, normalRoute, peakHourRoute)
+    Bus b1 = new Bus("Bus-01", "LEA-1234", "7:30 AM", "7:45 AM", "Tarlai → Campus",        "Tarlai → Faizabad → Campus");
+    Bus b2 = new Bus("Bus-02", "LEA-5678", "7:50 AM", "8:00 AM", "Chandni Chowk → Campus", "Chandni Chowk → Khanna → Campus");
+    Bus b3 = new Bus("Bus-03", "LEA-9012", "9:00 AM", "9:15 AM", "Fazal Town → Campus",    "Fazal Town → Scheme 3 → Campus");
+
+    transport.addBus(b1);
+    transport.addBus(b2);
+    transport.addBus(b3);
+
+    // ── TWO BUTTONS ───────
+    JButton classScheduleBtn = new JButton("View Class Schedule");
+    JButton busScheduleBtn   = new JButton("View Bus Schedule");
+
+    JPanel btnPanel = new JPanel(); // FlowLayout — buttons sit side by side
+    btnPanel.add(classScheduleBtn);
+    btnPanel.add(busScheduleBtn);
+    panel.add(btnPanel, BorderLayout.NORTH);
+
+    // Instead of message box, I used TextArea here
+
+    JTextArea outputArea = new JTextArea();
+    outputArea.setEditable(false);  // read only
+    outputArea.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    JScrollPane sp = new JScrollPane(outputArea);
+    panel.add(sp, BorderLayout.CENTER);
+
+    // ── CLASS SCHEDULE BUTTON ──────
+    classScheduleBtn.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            // Clear previous output
+            outputArea.setText("");
+            outputArea.append(" CLASS SCHEDULE \n");
+            // c1 schedule
+            if (c1.getAssignedClassroom() != null) {
+                outputArea.append("Course     : " + c1.getCourseName()                  + "\n");
+                outputArea.append("Course ID  : " + c1.getCourseID()                    + "\n");
+                outputArea.append("Credit Hrs : " + c1.getCreditHours()                 + "\n");
+                outputArea.append("Classroom  : " + c1.getAssignedClassroom().getName() + "\n");
+                outputArea.append("Location   : " + c1.getAssignedClassroom().getLocation() + "\n");
+                outputArea.append("Timeslot   : " + c1.getTimeSlot()                    + "\n");
+            } else {
+                outputArea.append(c1.getCourseName() + " : No classroom assigned.\n");
+            }
+
+            outputArea.append("\n------------------------------\n\n");
+
+            // c2 schedule
+            if (c2.getAssignedClassroom() != null) {
+                outputArea.append("Course     : " + c2.getCourseName()                  + "\n");
+                outputArea.append("Course ID  : " + c2.getCourseID()                    + "\n");
+                outputArea.append("Credit Hrs : " + c2.getCreditHours()                 + "\n");
+                outputArea.append("Classroom  : " + c2.getAssignedClassroom().getName() + "\n");
+                outputArea.append("Location   : " + c2.getAssignedClassroom().getLocation() + "\n");
+                outputArea.append("Timeslot   : " + c2.getTimeSlot()                    + "\n");
+            } else {
+                outputArea.append(c2.getCourseName() + " : No classroom assigned.\n");
+            }
+
+            outputArea.append("\n==============================\n");
+        }
+    });
+
+    // ── BUS SCHEDULE BUTTON ─────
+    busScheduleBtn.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            outputArea.setText("");
+            outputArea.append(" BUS SCHEDULE \n");
+
+            outputArea.append("Service  : " + transport.getName()     + "\n");
+            outputArea.append("Location : " + transport.getLocation() + "\n");
+            outputArea.append("Total Buses : " + transport.getTotalBuses() + "\n\n");
+
+            // Loop through the buses ArrayList inside transport
+            for (int i = 0; i < transport.getBuses().size(); i++) {
+                Bus b = transport.getBuses().get(i);
+                outputArea.append("--- Bus " + (i + 1) + " ---\n");
+                outputArea.append("Bus No.      : " + b.getBusnumber()      + "\n");
+                outputArea.append("Number Plate : " + b.getBusNumberPlate() + "\n");
+                outputArea.append("Arrival      : " + b.getArrivalTime()    + "\n");
+                outputArea.append("Departure    : " + b.getDepartureTime()  + "\n");
+                outputArea.append("Route        : " + b.getCurrentRoute()   + "\n\n");
+            }
+
+            outputArea.append("==============================\n");
+        }
+    });
+
+    return panel;
+}
+
 }
 
 

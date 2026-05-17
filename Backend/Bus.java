@@ -26,7 +26,7 @@ public class Bus implements Serializable {
     }
 
     //Argument Constructor 
-    public Bus(String busumber, String busNumberPlate, String arrivalTime, String departureTime, String normalRoute, String peakHourRoute) {
+    public Bus(String busnumber, String busNumberPlate, String arrivalTime, String departureTime, String normalRoute, String peakHourRoute) {
 
         setArrivalTime(arrivalTime);
         setBusNumberPlate(busNumberPlate);
@@ -46,11 +46,7 @@ public class Bus implements Serializable {
 
     public final void setBusnumber(String busnumber) {
         
-        if(!busnumber.isBlank()) {
-            this.busnumber = busnumber;
-        }else{
-            this.busnumber = null;
-        }
+        this.busnumber = busnumber;
     }
 
     public String getBusNumberPlate() {

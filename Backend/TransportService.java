@@ -61,6 +61,9 @@ public class TransportService extends ServiceUnit implements Schedulable{
         System.out.println("Routes Adjusted Per Normal Time Requirements.");
     }
 
+    public ArrayList<Bus> getBuses(){
+        return buses;
+    }
     //Generating Schedule 
     @Override
     public void generateSchedule() {
