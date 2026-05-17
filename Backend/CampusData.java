@@ -15,13 +15,13 @@ public class CampusData implements Serializable{
     ArrayList<Department> departments = new ArrayList<>();
     ArrayList<Lab> labs = new ArrayList<>();
     ArrayList<Classroom> classrooms = new ArrayList<>();
-    ArrayList<Cafeteria> cafeterias = new ArrayList<>();
-    ArrayList<Library> libraries = new ArrayList<>();
-    ArrayList<Books> books = new ArrayList<>();
-    ArrayList<Hostel> hostels = new ArrayList<>();
-    ArrayList<TransportService> transportServices = new ArrayList<>();
-    ArrayList<SecurityService> securityServices = new ArrayList<>();
-    ArrayList<HealthCenter> healthCenters = new ArrayList<>();
+    public Cafeteria cafeteria;
+    public Library library;
+    public ArrayList<Books> books = new ArrayList<>();
+    public ArrayList<Hostel> hostels = new ArrayList<>();
+    TransportService transportService;
+    SecurityService securityService;
+    HealthCenter healthCenter;
     ArrayList<Bus> bus = new ArrayList<>();
 
     //Constructors

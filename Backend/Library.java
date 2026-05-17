@@ -26,7 +26,9 @@ public class Library extends Facility implements Reportable{
         }
     }
 
-      
+    public ArrayList<Books> getBooks() {
+    return b1;
+}
     //Displaying the total books present in the library
     public int totalBooks() {
         return b1.size();
@@ -72,7 +74,7 @@ public class Library extends Facility implements Reportable{
     @Override
     //Calculate Operational costs
     public double calculateOperationalCost(){
-        return (maintenance_cost * usage_frequency) + (b1.size() * 150);
+        return ((maintenance_cost * usage_frequency) + (b1.size() * 150));
 
         //multiplying the number of books with a dummy value like 150. and then adding it to the operational costs.
     }

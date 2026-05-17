@@ -33,6 +33,11 @@ public class Hostel extends Facility{
                   
             }
     }
+
+    public int getTotalRooms()
+    {
+      return isOccupied.length;
+    }
       
     //Hostel data calculation 
     public int occupiedrooms() {
