@@ -14,7 +14,7 @@ public class TransportService extends ServiceUnit implements Schedulable{
         super();
     }
     
-    public TransportService(String name, String location, int entityID, String routeName, int totalBuses) {
+    public TransportService(String name, String location, int entityID) {
         super(name, location, entityID);
     }
 

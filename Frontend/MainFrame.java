@@ -104,7 +104,7 @@ public class MainFrame extends JFrame {
         form.add(new Label("Registration #: ")); form.add(regField);
         form.add(new Label("Program: ")); form.add(programField);
         form.add(new Label("CGPA: ")); form.add(cgpaField);
-        form.add(buttonsPanel);
+        //form.add(buttonsPanel);
         
 
     //2) Create table to display student information
@@ -267,8 +267,10 @@ public class MainFrame extends JFrame {
         }
     });
 
-        //Add the form to the panel
-        panel.add(form, BorderLayout.NORTH);
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(form, BorderLayout.NORTH);
+        topPanel.add(buttonsPanel, BorderLayout.SOUTH);
+        panel.add(topPanel, BorderLayout.NORTH);
         panel.add(scrollPane, BorderLayout.CENTER);
         return panel;
 
@@ -412,7 +414,7 @@ public class MainFrame extends JFrame {
         JPanel btnPanel = new JPanel();
         btnPanel.add(addBookBtn); btnPanel.add(deleteBookBtn);
         btnPanel.add(opCostBtn);
-        form.add(btnPanel);
+        //form.add(btnPanel);
  
         // Columns matching Books attributes
         String[] columns = {"Book Name", "Author", "Edition", "Available"};
@@ -490,7 +492,11 @@ public class MainFrame extends JFrame {
             }
         });
  
-        panel.add(form, BorderLayout.NORTH);
+        //Creating a top panel to ensure that buttons are seen 
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(form, BorderLayout.NORTH);
+        topPanel.add(btnPanel, BorderLayout.SOUTH);
+        panel.add(topPanel, BorderLayout.NORTH);
         panel.add(sp,   BorderLayout.CENTER);
         return panel;
     }
@@ -533,8 +539,8 @@ public class MainFrame extends JFrame {
             }
         });
  
-        panel.add(sp,         BorderLayout.CENTER);
-        panel.add(btnPanel,  BorderLayout.SOUTH);
+        panel.add(sp, BorderLayout.CENTER);
+        panel.add(btnPanel, BorderLayout.SOUTH);
         return panel;
     }
  
@@ -647,7 +653,7 @@ public class MainFrame extends JFrame {
     c2.scheduleClass();
 
     // Create transport service and add buses to it
-    TransportService transport = new TransportService("Campus Transport", "Gate 1", 601, "Main Route", 3);
+    TransportService transport = new TransportService("Campus Transport", "Gate 1", 601);
 
     // Bus(busNumber, numberPlate, arrivalTime, departureTime, normalRoute, peakHourRoute)
     Bus b1 = new Bus("Bus-01", "LEA-1234", "7:30 AM", "7:45 AM", "Tarlai → Campus",        "Tarlai → Faizabad → Campus");

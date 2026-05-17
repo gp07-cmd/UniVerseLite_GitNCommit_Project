@@ -24,7 +24,7 @@ public class CampusData implements Serializable{
     HealthCenter healthCenter;
     public ArrayList<Bus> bus = new ArrayList<>();
     public ArrayList<User> users = new ArrayList<>();
-
+    
     //Constructors
     public CampusData() {
     }
