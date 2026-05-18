@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
         }
 
         if(!currentUser.grantAccess("enrollCourse")) {
-            enrollBtn.setVisible(false);
+            enrollBtn.setVisible(true);
         }
 
 
@@ -520,13 +520,18 @@ public class MainFrame extends JFrame {
         JTable table   = new JTable(model);
         JScrollPane sp = new JScrollPane(table);
  
-        model.addRow(new Object[]{"1", "Biryani",        "150"});
-        model.addRow(new Object[]{"2", "Daal Chawal",    "100"});
+        model.addRow(new Object[]{"1", "Biryani", "150"});
+        model.addRow(new Object[]{"2", "Daal Chawal", "100"});
         model.addRow(new Object[]{"3", "Chicken Karahi", "200"});
-        model.addRow(new Object[]{"4", "Paratha",         "30"});
-        model.addRow(new Object[]{"5", "Omelette",        "50"});
-        model.addRow(new Object[]{"6", "Tea",             "20"});
-        model.addRow(new Object[]{"7", "Cold Drink",      "60"});
+        model.addRow(new Object[]{"4", "Paratha", "30"});
+        model.addRow(new Object[]{"5", "Omelette", "50"});
+        model.addRow(new Object[]{"6", "Tea", "20"});
+        model.addRow(new Object[]{"7", "Cold Drink", "60"});
+
+        // Create cafeteria if it doesn't exist
+       if(data.cafeteria == null) {
+            data.cafeteria = new Cafeteria("Main Cafeteria", "Block E", 122, 500, 20, 20, 250);
+        }
  
         // Operational cost button — calls backend method
         JButton opCostBtn = new JButton("Show Operational Cost");
