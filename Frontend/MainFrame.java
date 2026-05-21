@@ -27,11 +27,8 @@ public class MainFrame extends JFrame {
         setSize(800, 550);
         setLocationRelativeTo(null); //Opens screen in center
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        //File load on Window Opening
-        //data = filehandler.loadOnStartup("campusdata.dat");
         //Save file on Window Closing
         //We use abstract class 'WindowAdapter' that provides us with WindowListening events and abstract methods to be overriden (e.g. windowClosing, windowOpening)
-        //The following is a COMPLETE variable declaration statement
         WindowAdapter listener = new WindowAdapter(){ 
         @Override //JFrame method windowClosing
         public void windowClosing(WindowEvent e)
@@ -74,13 +71,13 @@ public class MainFrame extends JFrame {
         JTextField cgpaField = new JTextField(5);
 
         //Add Button to Save the Student Info
-        JButton addBtn = new JButton("Add Student");
+        JButton addBtn = AppTheme.primaryButton("Add Student");
         //Add Button to Delete a Selected Student from the Table
-        JButton deleteBtn = new JButton("Delete Student");
+        JButton deleteBtn = AppTheme.dangerButton("Delete Student");
         //Add Button to Enroll Course for Selected Student
-        JButton enrollBtn = new JButton("Enroll Course");
+        JButton enrollBtn = AppTheme.secondaryButton("Enroll Course");
         //Add Button to Display enrolled courses for Selected Student
-        JButton viewEnrolledBtn = new JButton("View Courses");
+        JButton viewEnrolledBtn = AppTheme.secondaryButton("View Courses");
 
         //Adding checks to ensure correct accesss is granted 
 
@@ -141,16 +138,26 @@ public class MainFrame extends JFrame {
             String stName = nameField.getText().trim();
             String regNo = regField.getText().trim();
             String program = programField.getText().trim();
-            double cgpa = Double.valueOf(cgpaField.getText().trim());
+            String cgpa1 = cgpaField.getText().trim();
 
 
             //First Check if user has typed anything or its empty
-            if(stName.isEmpty() || regNo.isEmpty() || program.isEmpty())
+            if(stName.isEmpty() || regNo.isEmpty() || program.isEmpty() || cgpa1.isEmpty())
             {
                 JOptionPane.showMessageDialog(panel, "Please Enter Information Completely in All Fields.");
                 return;
             }
+            //Then check if student already exists
+            for(Student student : data.students)
+            {
+                if(student.getStname().equalsIgnoreCase(stName) || student.getRegnum().equalsIgnoreCase(regNo))
+                {
+                    JOptionPane.showMessageDialog(panel, "Student already enrolled. Please add a new student.");
+                    return;
+                }
+            }
             //Create a new Student object (we store it in our backend)
+            double cgpa = Double.valueOf(cgpa1);
             Student s = new Student(stName, regNo, program, cgpa);
             data.students.add(s);
             //Now add this student to our table and display on interface
@@ -289,8 +296,8 @@ public class MainFrame extends JFrame {
         form.add(new Label("Credit Hours: ")); form.add(creditHrsField);
         
         //2)Create the Buttons
-        JButton addBtn = new JButton("Add Course");
-        JButton deleteBtn = new JButton("Delete Course");
+        JButton addBtn = AppTheme.primaryButton("Add Course");
+        JButton deleteBtn = AppTheme.dangerButton("Delete Course");
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addBtn); buttonPanel.add(deleteBtn);
 
@@ -409,9 +416,9 @@ public class MainFrame extends JFrame {
         form.add(new JLabel("Author:"));    form.add(authorField);
         form.add(new JLabel("Edition:"));   form.add(editionField);
  
-        JButton addBookBtn    = new JButton("Add Book");
-        JButton deleteBookBtn = new JButton("Delete Book");
-        JButton opCostBtn     = new JButton("Show Op. Cost");
+        JButton addBookBtn    = AppTheme.primaryButton("Add Book");
+        JButton deleteBookBtn = AppTheme.dangerButton("Delete Book");
+        JButton opCostBtn     = AppTheme.secondaryButton("Show Op. Cost");
  
         JPanel btnPanel = new JPanel();
         btnPanel.add(addBookBtn); btnPanel.add(deleteBookBtn);
@@ -533,7 +540,7 @@ public class MainFrame extends JFrame {
         }
  
         // Operational cost button — calls backend method
-        JButton opCostBtn = new JButton("Show Operational Cost");
+        JButton opCostBtn = AppTheme.primaryButton("Show Operational Cost");
         JPanel btnPanel = new JPanel();
         btnPanel.add(opCostBtn);
         opCostBtn.addActionListener(new ActionListener() {
@@ -568,7 +575,7 @@ public class MainFrame extends JFrame {
         JScrollPane sp = new JScrollPane(table);
  
         // ── BUTTONS ─────────
-        JButton opCostBtn = new JButton("Show Operational Cost");
+        JButton opCostBtn = AppTheme.primaryButton("Show Operational Cost");
         JPanel btnPanel = new JPanel();
         btnPanel.add(opCostBtn);
  
@@ -607,8 +614,8 @@ public class MainFrame extends JFrame {
         JPanel panel = new JPanel(new BorderLayout()); //main panel
         JLabel infoLabel = new JLabel("REPORTS");
         //1) Library Report
-        JButton libraryBtn = new JButton("Library Report");
-        JButton departmentBtn = new JButton("Department Report");
+        JButton libraryBtn = AppTheme.primaryButton("Library Report");
+        JButton departmentBtn = AppTheme.primaryButton("Department Report");
         panel.add(libraryBtn, BorderLayout.WEST);
         panel.add(departmentBtn, BorderLayout.EAST);
         libraryBtn.addActionListener(new ActionListener(){
@@ -672,8 +679,8 @@ public class MainFrame extends JFrame {
     transport.addBus(b3);
 
     // ── TWO BUTTONS ───────
-    JButton classScheduleBtn = new JButton("View Class Schedule");
-    JButton busScheduleBtn   = new JButton("View Bus Schedule");
+    JButton classScheduleBtn = AppTheme.primaryButton("View Class Schedule");
+    JButton busScheduleBtn   = AppTheme.primaryButton("View Bus Schedule");
 
     JPanel btnPanel = new JPanel(); // FlowLayout — buttons sit side by side
     btnPanel.add(classScheduleBtn);
@@ -757,5 +764,7 @@ public class MainFrame extends JFrame {
 }
 
 }
+
+
 
 
