@@ -19,9 +19,9 @@ public class LoginFrame extends JFrame {
 
         //Creating a panel that holds the username and password fields
         JPanel jp = new JPanel();
-        JTextField usernamefield = new JTextField(10);
-        JPasswordField passwordfield = new JPasswordField(10);
-        JButton loginbutton = new JButton("Login");
+        JTextField usernamefield = AppTheme.styledField(10);
+        JPasswordField passwordfield = AppTheme.styledPasswordField(10);
+        JButton loginbutton = AppTheme.primaryButton("Login");
 
         //Adding the created fields on to the panel 
         jp.add(new Label("Username : "));

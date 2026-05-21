@@ -116,7 +116,7 @@ public class AppTheme {
     return btn;
 }
 
-//2) Danger / Exit Button
+//3) Danger / Exit Button
 public static JButton dangerButton(String text) {
 
     JButton btn = new JButton(text) {
@@ -150,6 +150,50 @@ public static JButton dangerButton(String text) {
     //btn.setPreferredSize(new Dimension(140, 34));
     return btn;
 }
+//4) Add a stylised text field
+    public static JTextField styledField(int cols){
+        JTextField tf = new JTextField(cols);
+        tf.setFont(FONT_BODY);
+        tf.setBackground(WHITE);
+        tf.setForeground(TEXT_DARK);
+        //To design the two layers of text-box
+        //Outer layer: LineBorder()  Inner Layer: EmptyBorder + Padding
+        tf.setBorder(BorderFactory.createCompoundBorder(
+            new LineBorder(AppTheme.LAVENDER, 1, true), //Outer 1px lavender
+            BorderFactory.createEmptyBorder(5,10,5,10) //Inner padding
+        ));
+        return tf;
+    }
+    public static JPasswordField styledPasswordField(int cols) {
+    JPasswordField f = new JPasswordField(cols);
+
+    f.setFont(AppTheme.FONT_BODY);
+    f.setForeground(AppTheme.TEXT_DARK);
+    f.setBackground(Color.WHITE);
+    f.setBorder(BorderFactory.createCompoundBorder(
+        new LineBorder(AppTheme.LAVENDER, 1, true),
+        BorderFactory.createEmptyBorder(5, 10, 5, 10)
+    ));
+    return f;
+}
+
+    public static void styledTable(javax.swing.JTable table)
+    {
+        //General Settings
+        table.setFont(FONT_BODY);
+        table.setRowHeight(28);
+        table.setGridColor(new Color(0xE8, 0xE5, 0xF2));
+        table.setSelectionBackground(LAVENDER);
+        table.setSelectionForeground(NAVY);
+        table.setShowHorizontalLines(true);
+        table.setShowVerticalLines(false);
+
+        //Font for table headers
+        table.getTableHeader().setFont(FONT_BUTTON);
+        table.getTableHeader().setBackground(NAVY);
+        table.getTableHeader().setForeground(WHITE);
+
+    }
     //For applying themes to entire JFrame
     public static void applyGlobalDefaults(){
         UIManager.put("Panel.background", AppTheme.SOFT_BG);

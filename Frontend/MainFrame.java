@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -24,7 +25,7 @@ public class MainFrame extends JFrame {
 
         //Window Properties
         setTitle("University Management System");
-        setSize(800, 550);
+        setSize(1000, 550);
         setLocationRelativeTo(null); //Opens screen in center
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         //Save file on Window Closing
@@ -64,11 +65,13 @@ public class MainFrame extends JFrame {
         //Now create the submission form
         JPanel form = new JPanel();
 
+        //Main Heading
+        
         //Text Fields & Labels
-        JTextField nameField = new JTextField(12);
-        JTextField regField = new JTextField(12);
-        JTextField programField = new JTextField(12);
-        JTextField cgpaField = new JTextField(5);
+        JTextField nameField = AppTheme.styledField(12);
+        JTextField regField = AppTheme.styledField(12);
+        JTextField programField = AppTheme.styledField(12);
+        JTextField cgpaField = AppTheme.styledField(5);
 
         //Add Button to Save the Student Info
         JButton addBtn = AppTheme.primaryButton("Add Student");
@@ -97,10 +100,10 @@ public class MainFrame extends JFrame {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.add(addBtn); buttonsPanel.add(deleteBtn); buttonsPanel.add(enrollBtn); buttonsPanel.add(viewEnrolledBtn);
         //Match Labels with the Text Fields
-        form.add(new Label("Student Name: ")); form.add(nameField);
-        form.add(new Label("Registration #: ")); form.add(regField);
-        form.add(new Label("Program: ")); form.add(programField);
-        form.add(new Label("CGPA: ")); form.add(cgpaField);
+        form.add(new JLabel("Student Name: ")); form.add(nameField);
+        form.add(new JLabel("Registration #: ")); form.add(regField);
+        form.add(new JLabel("Program: ")); form.add(programField);
+        form.add(new JLabel("CGPA: ")); form.add(cgpaField);
         
 
     //2) Create table to display student information
@@ -109,6 +112,14 @@ public class MainFrame extends JFrame {
     DefaultTableModel model = new DefaultTableModel(columns, 0); //rows '0' since initially no entry is there
     //Create a table based on the model
     JTable table = new JTable(model);
+    AppTheme.styledTable(table);
+    //To centralise the elements of our table, we use DefaultTableCellRenderer
+    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+    centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+    for(int i = 0; i < columns.length; i++)
+    {
+        table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+    }
     //Create a scrollpane to easily navigate the table
     JScrollPane scrollPane = new JScrollPane(table);
 
@@ -288,12 +299,12 @@ public class MainFrame extends JFrame {
         //1) Create the Course Form
         JPanel panel = new JPanel(new BorderLayout()); //Main Panel
         JPanel form = new JPanel(); //default FlowLayout
-        JTextField nameField = new JTextField(12);
-        JTextField IDField = new JTextField(12);
-        JTextField creditHrsField = new JTextField("0", 5);
-        form.add(new Label("Course Name: ")); form.add(nameField);
-        form.add(new Label("Course ID: ")); form.add(IDField);
-        form.add(new Label("Credit Hours: ")); form.add(creditHrsField);
+        JTextField nameField = AppTheme.styledField(12);
+        JTextField IDField = AppTheme.styledField(12);
+        JTextField creditHrsField = AppTheme.styledField(5);
+        form.add(new JLabel("Course Name: ")); form.add(nameField);
+        form.add(new JLabel("Course ID: ")); form.add(IDField);
+        form.add(new JLabel("Credit Hours: ")); form.add(creditHrsField);
         
         //2)Create the Buttons
         JButton addBtn = AppTheme.primaryButton("Add Course");
@@ -314,6 +325,13 @@ public class MainFrame extends JFrame {
         String[] columns = {"Course Name", "Course ID", "Credit Hours"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         JTable table = new JTable(model);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for(int i = 0; i < columns.length; i++)
+        {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        AppTheme.styledTable(table);
         JScrollPane scrollPane = new JScrollPane(table);
 
         //4)Retrieve Saved Data from File
@@ -408,9 +426,9 @@ public class MainFrame extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         JPanel form  = new JPanel();
  
-        JTextField bookNameField = new JTextField(10);
-        JTextField authorField   = new JTextField(10);
-        JTextField editionField  = new JTextField(6);
+        JTextField bookNameField = AppTheme.styledField(10);
+        JTextField authorField   = AppTheme.styledField(10);
+        JTextField editionField  = AppTheme.styledField(6);
  
         form.add(new JLabel("Book Name:")); form.add(bookNameField);
         form.add(new JLabel("Author:"));    form.add(authorField);
@@ -427,10 +445,19 @@ public class MainFrame extends JFrame {
  
         // Columns matching Books attributes
         String[] columns = {"Book Name", "Author", "Edition", "Available"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        JTable table   = new JTable(model);
+        DefaultTableModel model = new DefaultTableModel(columns, 0); //rows '0' since initially no entry is there
+        //Create a table based on the model
+            JTable table = new JTable(model);
+        AppTheme.styledTable(table);
+        //To centralise the elements of our table, we use DefaultTableCellRenderer
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for(int i = 0; i < columns.length; i++)
+        {
+        table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        //Create a scrollpane to easily navigate the table
         JScrollPane sp = new JScrollPane(table);
- 
         // ── LOAD BOOKS FROM FILE ──────────────────────────────────────────
         boolean doesExist = false;
         // data.library.getBooks() returns the b1 ArrayList inside Library
@@ -524,6 +551,7 @@ public class MainFrame extends JFrame {
         String[] columns = {"#", "Menu Item", "Price (Rs.)"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         JTable table   = new JTable(model);
+        AppTheme.styledTable(table);
         JScrollPane sp = new JScrollPane(table);
  
         model.addRow(new Object[]{"1", "Biryani", "150"});
@@ -572,6 +600,7 @@ public class MainFrame extends JFrame {
         String[] columns = {"#", "Hostel Name", "Total Rooms"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         JTable table   = new JTable(model);
+        AppTheme.styledTable(table);
         JScrollPane sp = new JScrollPane(table);
  
         // ── BUTTONS ─────────
@@ -640,6 +669,7 @@ public class MainFrame extends JFrame {
                     result += data.departments.get(i).generateReport() + "\n";
                 }
                 JOptionPane.showMessageDialog(panel, result, "Department Report", JOptionPane.INFORMATION_MESSAGE);
+                result = "";
             }
         });
         return panel;
