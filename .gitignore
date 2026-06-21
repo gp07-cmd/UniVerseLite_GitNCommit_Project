@@ -1,0 +1,6 @@
+*.class
+
+# Common Java build artifacts
+target/
+build/
+out/

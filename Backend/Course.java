@@ -93,16 +93,13 @@ public class Course implements Serializable, Schedulable {
     }
     
     //modify Deadline
-    public void modifyDeadline(int num) {
+    public void modifyDeadline(int num, String newDeadline) {
           boolean isfound = false;
         for(int i=0; i<a.size(); i++) {
             if(a.get(i).getAssignmentNum() == num) {
-                    Scanner inp = new Scanner(System.in);
-                    System.out.print("Enter Deadline = ");
-                    a.get(i).setDeadline(inp.next());
+                    a.get(i).setDeadline(newDeadline);
                     System.out.println("Deadline Modified");
                     isfound = true;
-                    inp.close();
             }      
         }
         if(!isfound){
