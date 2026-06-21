@@ -65,7 +65,7 @@ Name your branch descriptively:
 
 ### Step 4: Make your changes
 
-Open the project in your IDE (IntelliJ IDEA or Eclipse recommended). Make your fix or add your feature. Keep your changes focused — one issue per branch.
+Open the project in your IDE (VS Code, IntelliJ IDEA or Eclipse recommended). Make your fix or add your feature. Keep your changes focused — one issue per branch.
 
 ### Step 5: Test your changes
 
