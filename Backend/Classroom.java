@@ -69,7 +69,7 @@ public class Classroom extends AcademicUnit{
     public void removeStudent(Student s) {
         if(students.contains(s)){
             students.remove(s);
-            isAvailable = true;
+            isAvailable = students.size() < totalcapacity;
             System.out.println("Student removed");
         }else{
             System.out.println("No Student Found. Student Couldn't be Removed.");

@@ -64,7 +64,7 @@ public class Lab extends AcademicUnit {
     public void removeStudent(Student s) {
         if(students.contains(s)){
             students.remove(s);
-            isfree = true;
+            isfree = students.size() < totalcapacity;
             System.out.println("Student removed");
         }else{
             System.out.println("No Student Found. Student Couldn't be Removed.");
