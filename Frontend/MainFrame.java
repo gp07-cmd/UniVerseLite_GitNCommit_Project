@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,13 +19,13 @@ public class MainFrame extends JFrame {
 
     //(all window functions inside constructor)
     //Segment 1: -----WINDOW SETUP------ 
-    public MainFrame(User currentUser, CampusData data){
+    public MainFrame(CampusData data){
 
-        this.currentUser = currentUser;
+        this.currentUser = UserSession.getInstance().getCurrentUser();
         this.data = data;
 
         //Window Properties
-        setTitle("University Management System");
+        setTitle("UniVerse Lite \u2014 Welcome, " + currentUser.getUsername() + " (" + currentUser.getRole() + ")");
         setSize(1000, 550);
         setLocationRelativeTo(null); //Opens screen in center
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -35,26 +36,59 @@ public class MainFrame extends JFrame {
         public void windowClosing(WindowEvent e)
         {
             filehandler.saveToFile(data, "campusdata.dat");
-            dispose(); //closes the window
+            dispose();
+            System.exit(0);
         }
     };
         addWindowListener(listener);
+
+        // Profile header with welcome label and log out button
+        JPanel profileHeader = new JPanel(new BorderLayout());
+        profileHeader.setBackground(AppTheme.NAVY);
+        profileHeader.setBorder(new EmptyBorder(10, 14, 10, 14));
+
+        JLabel welcomeLabel = new JLabel("Welcome, " + currentUser.getUsername() + " (" + currentUser.getRole() + ")");
+        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        welcomeLabel.setForeground(Color.WHITE);
+
+        JButton logoutBtn = AppTheme.secondaryButton("Log Out");
+        logoutBtn.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to log out?", "Confirm Logout",
+                JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                filehandler.saveToFile(data, "campusdata.dat");
+                UserSession.getInstance().logout();
+                dispose();
+                new LoginFrame(data);
+            }
+        });
+
+        profileHeader.add(welcomeLabel, BorderLayout.WEST);
+        profileHeader.add(logoutBtn, BorderLayout.EAST);
+        add(profileHeader, BorderLayout.NORTH);
 
         //Segment 2: -----Tabs for campus entity data------ 
         //The following creates the tab bar on the top menu of our frame
         JTabbedPane tabs = new JTabbedPane();
         //Individual Tabs
-        //Add tabs to tab bar
-        tabs.addTab("Students", buildStudentPanel());
-        tabs.addTab("Courses", buildCoursePanel());
+        //Add tabs to tab bar based on user role
+        if (currentUser.canViewStudents()) {
+            tabs.addTab("Students", buildStudentPanel());
+        }
+        if (currentUser.canViewCourses()) {
+            tabs.addTab("Courses", buildCoursePanel());
+        }
         //tabs.addTab("Departments", buildDepartmentPanel());
         tabs.addTab("Facilities", buildFacilityPanel());
-        tabs.addTab("Reports", buildReportPanel());
-       tabs.addTab("Schedules", buildSchedulePanel());
-        //Set Visible
-        setVisible(true);
+        if (currentUser.canViewReports()) {
+            tabs.addTab("Reports", buildReportPanel());
+        }
+        tabs.addTab("Schedules", buildSchedulePanel());
         //Add the tabs to our mainframe, and we follow BorderLayout
         add(tabs, BorderLayout.CENTER);
+        //Set Visible
+        setVisible(true);
 }
 
     //---------Create the Students Tab Contents--------
@@ -93,7 +127,7 @@ public class MainFrame extends JFrame {
         }
 
         if(!currentUser.grantAccess("enrollCourse")) {
-            enrollBtn.setVisible(true);
+            enrollBtn.setVisible(false);
         }
 
 

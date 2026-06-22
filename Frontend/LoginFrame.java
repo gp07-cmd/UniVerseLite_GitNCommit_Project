@@ -17,7 +17,15 @@ public class LoginFrame extends JFrame {
         setTitle("User Login");
         setSize(500, 350);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (!UserSession.getInstance().isLoggedIn()) {
+                    System.exit(0);
+                }
+            }
+        });
 
         //Creating a panel that holds the username and password fields
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -82,8 +90,10 @@ public class LoginFrame extends JFrame {
                     User user = data.users.get(i);
                     if(user.getUsername().equals(username) && user.getPassword().equals(pass)) {
 
+                        UserSession.getInstance().login(user);
                         JOptionPane.showMessageDialog(mainPanel, "Login Successful");
-                        new MainFrame(user, data);
+                        LoginFrame.this.dispose();
+                        new MainFrame(data);
                         return;
                     }
                 }

@@ -3,6 +3,8 @@ package Backend;
 import java.io.Serializable;
 
 public class User implements Serializable {
+
+    private static final long serialVersionUID = 5429667519936553852L;
     
     //For the frontend and access responsibilty a user must have the following things to be ale to access the system
     private String username;
@@ -81,6 +83,33 @@ public class User implements Serializable {
         }else{
             return false;
         }
+    }
+
+    // A tab is restricted to Admin only when ALL features within it
+    // are already gated behind admin-only grantAccess actions.
+    // Students tab: Teacher can view enrolled courses (unrestricted btn),
+    //               Student can enroll + view courses → not admin-only.
+    // Courses tab:  only add/delete exist, both admin-only → safe to restrict.
+    // Reports tab:  Student has grantAccess("generateReport") and no
+    //               button-level checks → not admin-only.
+    public boolean canViewStudents() {
+        return true;
+    }
+
+    public boolean canViewCourses() {
+        return role.equalsIgnoreCase("Admin");
+    }
+
+    public boolean canViewFacilities() {
+        return true;
+    }
+
+    public boolean canViewReports() {
+        return true;
+    }
+
+    public boolean canViewSchedules() {
+        return true;
     }
 
 }//end of User Class 
