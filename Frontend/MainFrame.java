@@ -128,7 +128,7 @@ public class MainFrame extends JFrame {
 
         if(!currentUser.grantAccess("enrollCourse")) {
             enrollBtn.setVisible(false);
-        }
+     
 
 
         JPanel buttonsPanel = new JPanel();
