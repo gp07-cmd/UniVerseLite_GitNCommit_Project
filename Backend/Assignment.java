@@ -14,7 +14,7 @@ private static final long serialVersionUID = 1L;
     //Zero Argument Constructor
     public Assignment(){
         
-        assignment_num = 0;
+        setAssignmentNum(1);
         totalmarks = 1;
         title = null;
         deadline = null;
