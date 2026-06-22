@@ -35,7 +35,7 @@ private static final long serialVersionUID = 1L;
     //Setters
     public final void setBookName(String bookname) {
           
-        if(!bookname.isBlank()){
+        if(bookname != null && !bookname.isBlank()){
               this.bookname = bookname;
         }else{
               this.bookname = "Book Title Unknown";
@@ -44,7 +44,7 @@ private static final long serialVersionUID = 1L;
       
     public final void setAuthorName(String authorname) {
           
-        if(!authorname.isBlank()){
+        if(authorname != null && !authorname.isBlank()){
               this.authorname = authorname;
         }else{
               this.authorname = "Author Unknown";
@@ -53,7 +53,7 @@ private static final long serialVersionUID = 1L;
       
     public final void setEdition(String edition) {
           
-        if(!edition.isBlank()){
+        if(edition != null && !edition.isBlank()){
               this.edition = edition;
         }else{
               this.edition = "No Record of Edition Found";

@@ -30,7 +30,7 @@ private static final long serialVersionUID = 1L;
     //Setters (provided for admin as the admin will have full system access, so in case any attribute is to be modified it can be using setters) 
     public final void setName(String name){
 
-        if(!name.isBlank()){
+        if(name != null && !name.isBlank()){
             this.name = name;
         }else{
             this.name = null;
@@ -40,7 +40,7 @@ private static final long serialVersionUID = 1L;
 
     public final void setLocation(String location){
 
-        if(!location.isBlank()){
+        if(location != null && !location.isBlank()){
             this.location = location;
         }else{
             this.location = null;

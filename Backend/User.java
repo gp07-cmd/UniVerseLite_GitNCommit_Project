@@ -39,7 +39,7 @@ public class User implements Serializable {
     //Setters
     public final void setRole(String role) {
 
-        if(!role.isBlank()) {
+        if(role != null && !role.isBlank()) {
             this.role = role;
         }else{
             this.role = null;
@@ -48,7 +48,7 @@ public class User implements Serializable {
 
     public final void setPassword(String password) {
 
-        if(!password.isBlank()) {
+        if(password != null && !password.isBlank()) {
             this.password = password;
         }else{
             this.password = "name123";
@@ -57,7 +57,7 @@ public class User implements Serializable {
 
     public final void setUsername(String username) {
 
-        if(!username.isBlank()) {
+        if(username != null && !username.isBlank()) {
             this.username = username;
         }else{
             this.username = null;

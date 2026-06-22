@@ -43,7 +43,7 @@ public class Course implements Serializable, Schedulable {
     //Setters
     public final void setCourseName(String courseName) {
         
-        if(!courseName.isBlank()){
+        if(courseName != null && !courseName.isBlank()){
             this.courseName = courseName;
         }else{
             this.courseName = null;
@@ -52,7 +52,7 @@ public class Course implements Serializable, Schedulable {
     
     public final void setCourseID(String courseID) {
         
-        if(!courseID.isBlank()){
+        if(courseId != null && !courseID.isBlank()){
             this.courseID = courseID;
         }else{
             this.courseID = null;
@@ -222,7 +222,7 @@ public class Course implements Serializable, Schedulable {
     }
     
     public final void setTime(String t) {
-        if(!t.isBlank()) {
+        if(t != null && !t.isBlank()) {
             this.timeslot = t;
         }else{
             this.timeslot = null;

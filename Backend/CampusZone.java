@@ -42,7 +42,7 @@ private static final long serialVersionUID = 1L;
     }
 
     public final void setZoneName(String zoneName) {
-        if(!zoneName.isBlank()) {
+        if(zoneName != null && !zoneName.isBlank()) {
             this.zoneName = zoneName;
         }else{
             this.zoneName = "Zone Unknown";

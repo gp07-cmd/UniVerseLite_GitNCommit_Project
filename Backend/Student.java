@@ -38,7 +38,7 @@ public class Student implements Serializable{
     //Setters
     public final void setStname(String stname) {
 
-        if(!stname.isBlank()){
+        if(stname != null && !stname.isBlank()){
             this.stname = stname;
         }else{
             this.stname = "Unknown";
@@ -48,7 +48,7 @@ public class Student implements Serializable{
 
     public final void setRegnum(String regnum) {
 
-        if(!regnum.isBlank()){
+        if(regnum != null && !regnum.isBlank()){
             this.regnum = regnum;
         }else{
             this.regnum = "No Registration Number Assigned";
@@ -58,7 +58,7 @@ public class Student implements Serializable{
 
     public final void setProgram(String program) {
         
-        if(!program.isBlank()){
+        if(program != null && !program.isBlank()){
             this.program = program;
         }else{
             this.program = "Unknown";

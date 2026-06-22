@@ -27,7 +27,7 @@ public class Staff implements Serializable {
         return name;
     }
     public final void setName(String name) {
-          if(!name.isBlank()) {
+          if(name != null && !name.isBlank()) {
                 this.name = name;
           }else{
                 this.name = "Unknown";

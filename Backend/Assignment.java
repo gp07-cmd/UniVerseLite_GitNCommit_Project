@@ -34,7 +34,7 @@ private static final long serialVersionUID = 1L;
     //Setters (the teacher manages courses and students. The course class has multiple students and assignment objects. So the teacher might need setters for deadline extensions and other modifications)
     public final void setTitle(String title) {
         
-        if(!title.isBlank()){
+        if(title != null && !title.isBlank()){
             this.title = title;
         }else{
             this.title = null;
@@ -44,7 +44,7 @@ private static final long serialVersionUID = 1L;
 
     public final void setDeadline(String deadline) {
 
-        if(!deadline.isBlank()){
+        if(deadline != null && !deadline.isBlank()){
             this.deadline = deadline;
         }else{
             this.deadline = null;
