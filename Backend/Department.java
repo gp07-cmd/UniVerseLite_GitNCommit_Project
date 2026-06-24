@@ -110,6 +110,11 @@ public class Department extends AcademicUnit implements Reportable{
         
         }
 
+
+        // Defensive programming: handle departments with no enrolled students
+        if (totalstudentsenrolledincourse == 0) {
+            return "No students enrolled in this department.";
+        }
         double average_cgpa = total_cgpa / totalstudentsenrolledincourse;
         if( average_cgpa >= 3.67) {
             return "Excellent";
